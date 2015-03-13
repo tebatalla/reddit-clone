@@ -18,6 +18,20 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many(
+    :authored_posts,
+    class_name: :Post,
+    foreign_key: :author_id,
+    primary_key: :id
+  )
+
+  has_many(
+    :moderated_subs,
+    class_name: :Sub,
+    foreign_key: :moderator_id,
+    primary_key: :id
+  )
+
   def reset_session_token!
     self.session_token = User.generate_session_token
     self.save
