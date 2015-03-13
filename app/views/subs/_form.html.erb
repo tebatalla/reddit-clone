@@ -1,0 +1,15 @@
+<form action="<%= action_url %>" method="post">
+  <% unless action_url == subs_url %>
+  <input type="hidden" name="_method" value="patch">
+  <% end %>
+  <%= csrf_token %>
+  <label>Subreddit name
+    <input type="text" name="sub[title]" value="<%= sub.title %>">
+  </label>
+  <br>
+  <label>Description
+    <input type="text" name="sub[description]" value="<%= sub.description %>">
+  </label>
+  <br>
+  <input type="submit" name="Submit">
+</form>

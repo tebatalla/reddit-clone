@@ -1,6 +1,6 @@
 class SubsController < ApplicationController
-
   before_action :is_moderator?, only: [:edit, :update, :destroy]
+
   def index
     @subs = Sub.all
     render :index

@@ -1,0 +1,6 @@
+<h1>All the subs</h1>
+<ul>
+  <% Sub.all.each do |sub| %>
+  <li><%= link_to sub.title, sub_url(sub) %></li>
+  <% end %>
+</ul>
