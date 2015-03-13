@@ -10,3 +10,11 @@
 <a href="<%= @post.url %>"><%= @post.url %></a>
 <% end %>
 <p><%= @post.content %></p>
+<%= link_to 'Comment', new_post_comment_url(@post) %>
+<div>
+  <ul>
+    <% @post.comments.each do |comment| %>
+    <li><%= comment.content %> - <%= link_to comment.author.username, user_url(comment.author) %></li>
+    <% end %>
+  </ul>
+</div>

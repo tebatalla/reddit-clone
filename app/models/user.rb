@@ -32,6 +32,14 @@ class User < ActiveRecord::Base
     primary_key: :id
   )
 
+  has_many(
+    :comments,
+    class_name: :Comment,
+    foreign_key: :author_id,
+    primary_key: :id,
+    dependent: :destroy
+  )
+
   def reset_session_token!
     self.session_token = User.generate_session_token
     self.save
