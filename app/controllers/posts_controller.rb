@@ -41,13 +41,13 @@ class PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:sub_id, :title, :url, :content)
+      params.require(:post).permit(:title, :url, :content, sub_ids: [])
     end
 
     def is_author?
       @post = Post.find(params[:id])
       unless @post.author_id == current_user.id
-        flash.now[:errors] = "Not authorized"
+        flash.now[:errors] = ["Not authorized"]
         redirect_to post_url(@post)
       end
       true

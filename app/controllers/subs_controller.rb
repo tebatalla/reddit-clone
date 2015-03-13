@@ -53,7 +53,7 @@ class SubsController < ApplicationController
     def is_moderator?
       @sub = Sub.find(params[:id])
       unless @sub.moderator_id == current_user.id
-        flash.now[:errors] = "Not authorized"
+        flash.now[:errors] = ["Not authorized"]
         redirect_to sub_url(@sub)
       end
       true
