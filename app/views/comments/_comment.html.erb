@@ -1,0 +1,10 @@
+<ul>
+  <% comments_by_parent_id[parent_comment.id].each do |comment| %>
+    <li>
+      <%= comment.content %> -
+      <%= link_to comment.author.username, user_url(comment.author) %>
+      <%= link_to "Reply", comment_url(comment, parent_comment_id: comment.id, post_id: post.id) %>
+      <%= render 'comments/comment', comments_by_parent_id: comments_by_parent_id, parent_comment: comment, post: post %>
+    </li>
+    <% end %>
+  </ul>

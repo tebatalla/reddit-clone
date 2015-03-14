@@ -1,8 +1,13 @@
-<h1>New comment</h1>
+<h2>Comment by <%= @comment.author.username %></h2>
+<p>
+  <%= @comment.content %>
+</p>
 <form action="<%= comments_url %>" method="post">
   <%= csrf_token %>
   <input type="hidden" name="comment[post_id]" value="<%= params[:post_id] %>">
   <input type="hidden" name="comment[parent_comment_id]" value="<%= params[:parent_comment_id] %>">
+  <label>Reply to comment</label>
+  <br>
   <textarea name="comment[content]" rows="5" cols="60"></textarea>
   <br>
   <input type="submit" value="Submit cool comment">

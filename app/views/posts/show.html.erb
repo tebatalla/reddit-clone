@@ -13,8 +13,13 @@
 <%= link_to 'Comment', new_post_comment_url(@post) %>
 <div>
   <ul>
-    <% @post.comments.each do |comment| %>
-    <li><%= comment.content %> - <%= link_to comment.author.username, user_url(comment.author) %></li>
+    <% @comments_by_parent_id[nil].each do |top_level_comment| %>
+    <li>
+      <%= top_level_comment.content %> -
+      <%= link_to top_level_comment.author.username, user_url(top_level_comment.author) %>
+      <%= link_to "Reply", comment_url(top_level_comment, parent_comment_id: top_level_comment.id, post_id: @post.id) %>
+      <%= render 'comments/comment', parent_comment: top_level_comment, comments_by_parent_id: @comments_by_parent_id, post: @post %>
+    </li>
     <% end %>
   </ul>
 </div>
