@@ -7,6 +7,28 @@ class PostsController < ApplicationController
     render :show
   end
 
+  def upvote
+    @post = Post.find(params[:id])
+    @vote = Vote.new(votable: @post, voter_id: current_user.id, value: 1)
+    if @vote.save
+      redirect_to post_url(@post)
+    else
+      flash.now[:errors] = @vote.errors.full_messages
+      redirect_to post_url(@post)
+    end
+  end
+
+  def downvote
+    @post = Post.find(params[:id])
+    @vote = Vote.new(votable: @post, voter_id: current_user.id, value: -1)
+    if @vote.save
+      redirect_to post_url(@post)
+    else
+      flash.now[:errors] = @vote.errors.full_messages
+      redirect_to post_url(@post)
+    end
+  end
+
   def new
     @post = Post.new
     render :new

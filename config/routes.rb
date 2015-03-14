@@ -6,6 +6,15 @@ Rails.application.routes.draw do
   end
   resources :posts, except: [:index, :destroy, :new] do
     resources :comments, only: [:new]
+    member do
+      post 'upvote'
+      post 'downvote'
+    end
   end
-  resources :comments, only: [:create, :show]
+  resources :comments, only: [:create, :show] do
+    member do
+      post 'upvote'
+      post 'downvote'
+    end
+  end
 end

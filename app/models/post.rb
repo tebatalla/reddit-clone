@@ -15,6 +15,8 @@ class Post < ActiveRecord::Base
   validates :author_id, :title, presence: true
   validates :subs, presence: { message: "must be at least one" }
 
+  has_many :votes, as: :votable
+
   belongs_to(
     :author,
     class_name: :User,

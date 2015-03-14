@@ -19,6 +19,13 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
 
   has_many(
+   :votes,
+   class_name: :Vote,
+   foreign_key: :voter_id,
+   primary_key: :id
+   )
+
+  has_many(
     :authored_posts,
     class_name: :Post,
     foreign_key: :author_id,

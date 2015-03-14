@@ -1,11 +1,14 @@
 <h2><%= @post.title %></h2>
+<p>
+  <%= @post.votes.count %>
+</p>
+<%= button_to 'Edit post', edit_post_url(@post), method: :get if @post.author == current_user %>
 <h3>created by <%= link_to @post.author.username, user_url(@post.author) %></h3>
 <p>in
 <% @post.subs.each do |sub| %>
 <%= link_to sub.title, sub_url(sub) %>
 <% end %>
 </p>
-<%= button_to 'Edit post', edit_post_url(@post), method: :get if @post.author == current_user %>
 <% if @post.url %>
 <a href="<%= @post.url %>"><%= @post.url %></a>
 <% end %>
@@ -17,9 +20,13 @@
     <li>
       <%= top_level_comment.content %> -
       <%= link_to top_level_comment.author.username, user_url(top_level_comment.author) %>
+      <%= button_to '+', upvote_comment_url(top_level_comment), method: :post %>
+      <%= button_to '-', downvote_comment_url(top_level_comment), method: :post %>
       <%= link_to "Reply", comment_url(top_level_comment, parent_comment_id: top_level_comment.id, post_id: @post.id) %>
       <%= render 'comments/comment', parent_comment: top_level_comment, comments_by_parent_id: @comments_by_parent_id, post: @post %>
     </li>
     <% end %>
   </ul>
 </div>
+<%= button_to 'Upvote', upvote_post_url(@post), method: :post %>
+<%= button_to 'Downvote', downvote_post_url(@post), method: :post %>
