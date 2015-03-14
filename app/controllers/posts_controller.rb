@@ -38,7 +38,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.author_id = current_user.id
     if @post.save
-      flash[:notice] = "Post created!"
+      flash[:notice] = ["Post created!"]
       redirect_to post_url(@post)
     else
       flash.now[:errors] = @post.errors.full_messages
@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.update(params[:id], post_params)
     if @post.save
-      flash[:notice] = "Changes saved"
+      flash[:notice] = ["Changes saved"]
       redirect_to post_url(@post)
     else
       flash.now[:errors] = @post.errors.full_messages
